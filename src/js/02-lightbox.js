@@ -7,7 +7,7 @@ const markup = galleryItems
     return `
     <li>
     <a class="gallery__item"
-    href="${item.original}">>
+    href="${item.original}">
   <img class="gallery__image"
   src="${item.preview}"
   alt="${item.description}" />
