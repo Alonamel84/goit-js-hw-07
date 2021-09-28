@@ -16,7 +16,7 @@ const markup = galleryItems
 </div>`;
   })
   .join('');
-
+let instance = null;
 document.querySelector('.gallery').insertAdjacentHTML('beforeend', markup);
 document.querySelector('.gallery').addEventListener('click', function (e) {
   e.preventDefault();
@@ -24,7 +24,7 @@ document.querySelector('.gallery').addEventListener('click', function (e) {
     return;
   }
   const imgToInsert = e.target.dataset.source;
-  const instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
 
            <img src= "${imgToInsert}"
            />
@@ -32,9 +32,20 @@ document.querySelector('.gallery').addEventListener('click', function (e) {
   `);
 
   instance.show();
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      instance.close();
-    }
-  });
 });
+document.addEventListener('keydown', function (e) {
+  if (!instance && !instance.visible()) return false;
+  if (e.key === 'Escape') {
+    instance.close();
+  }
+});
+// const removeListenerBtn = document.querySelector('#body');
+// removeListenerBtn.addEventListener('keydown', e => {
+//   btn.removeEventListener('click', handleClick);
+// });
+
+//   document.removeEventListener('keydown', function (e) {
+//     if (e.key === 'Escape') {
+//       instance.close();
+//     }
+//   });
